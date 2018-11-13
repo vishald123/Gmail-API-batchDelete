@@ -1,29 +1,8 @@
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
-var express = require('express');
-var app = express();
 
-app.use(function (req, res, next) {
 
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', '*');
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  //res.setHeader('Upgrade','websocket');
-
-  // Pass to next layer of middleware
-  next();
-});
 
 
 // If modifying these scopes, delete token.json.
@@ -116,47 +95,9 @@ function listLabels(auth) {
   });
 }
 
-// var options = {
-//   userId: 'me',
-//   "resource": {
-//     "ids": [
-//       "rfc822msgid:0000000000007244290579ad164e@google.com",
-//       "rfc822msgid:1767109781.0.1540553264207@Aitlp-65"
-//     ]
-//   }
-// }
-
 function deletebatch(auth) {
     const gmail = google.gmail({version: 'v1', auth});
-    gmail.users.messages.batchDelete({userId: "me","resource": {"ids": ["msg-f:1616022546710578069"]}}), 
-    (err, res) => {
-      if (err) {
-          return console.log('The API returned an error: ' + err);
-        }
-        else {
-          console.log({message : success},res);
-        }
-    };
+    gmail.users.messages.batchDelete({userId: "me","resource": {"ids": ["msg-f:1616799983745199319"]}})
   }
 
-  // function execute(auth) {
-  //   const gmail = google.gmail({version: 'v1', auth});
-  //   var p1 = gmail.users.messages.batchDelete({
-  //     "userId": "me",
-  //     "resource": {
-  //       "ids": [
-  //         "rfc822msgid:0000000000007244290579ad164e@google.com"
-  //       ]
-  //     }
-  //   })
-  //       p1.then(function(response) {
-  //               // Handle the results here (response.result has the parsed body).
-  //               console.log("Response", response);
-  //             },
-  //             function(err) { console.error("Execute error", err); });
-      
-  // }
-
-  // app.listen(3000, () => {
-  //   console.log('JSON Server is running');
-  // });
+ 
